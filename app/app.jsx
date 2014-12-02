@@ -32,9 +32,11 @@ var TodoItem = Backbone.Model.extend({
 /*
  Todo collection store.
  */
-var TodoStore = Backbone.Collection.extend({
+var TodoStore = Backbone.Firebase.Collection.extend({
   model: TodoItem,
   //sync: BackboneLocalStorageSync('flux-backbone-todo'),
+  url: 'https://shining-inferno-2496.firebaseio.com/todos',
+  autoSync: true,
 
   initialize: function(models, options) {
     this.dispatcher = options.dispatcher;
@@ -46,7 +48,7 @@ var TodoStore = Backbone.Collection.extend({
     this.on('error', function(model, resp) {
       console.log('ERROR: sync error:', resp);
     });
-    //this.fetch(); // Load models from localStorage.
+    //this.fetch(); // Load models from storage.
   },
 
   dispatchCallback: function(payload) {
@@ -63,8 +65,8 @@ var TodoStore = Backbone.Collection.extend({
         var completed = this.filter(function(todoItem) {
           return todoItem.get('complete');
         });
-        // Destroy todoItem before removing from collection.
-        // Because removed models have no collection property which is required by LocalStorage.
+        //// Destroy todoItem before removing from collection.
+        //// Because removed models have no collection property which is required by LocalStorage.
         //completed.forEach(function(todoItem) {
         //  todoItem.destroy()
         //});
@@ -79,6 +81,8 @@ var TodoStore = Backbone.Collection.extend({
  Todo form.
  */
 var TodoFormComponent = React.createClass({
+  //mixins: [ReactFireMixin],
+
   propTypes: {
     store: React.PropTypes.instanceOf(TodoStore)
   },
@@ -113,6 +117,8 @@ var TodoFormComponent = React.createClass({
  Todo list component.
  */
 var TodoListComponent = React.createClass({
+  //mixins: [ReactFireMixin],
+
   propTypes: {
     store: React.PropTypes.instanceOf(TodoStore).isRequired
   },
@@ -142,6 +148,8 @@ var TodoListComponent = React.createClass({
  Todo item component.
  */
 var TodoItemComponent = React.createClass({
+  //mixins: [ReactFireMixin],
+
   propTypes: {
     todoItem: React.PropTypes.instanceOf(TodoItem).isRequired
   },
