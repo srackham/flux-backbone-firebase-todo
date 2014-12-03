@@ -7,24 +7,26 @@ persistance.
 
 The changes are minimal, largely amounting to replacing the Backbone
 Todo Collection with a
-[BackboneFire](https://www.firebase.com/docs/web/libraries/backbone/quickstart.html)
+[BackboneFire](https://github.com/firebase/backbonefire)
 Collection. The remaining changes replaced node modules with
-`<script>` tags because Firebase JavaScript modules are not
-distributed via npm -- this in turn does away with the need to bundle
-the app for distribution using Webpack.
+`<script>` tags because Firebase JavaScript modules are not (as of
+November 2014) distributed via npm -- this in turn does away with the
+need to bundle the app for distribution using Webpack.
 
+**IMPORTANT**: You will need to create your own Firebase account to
+run or deploy the application **and** you will need to:
 
-## Building and Running
-You need a Firebase account to deploy the application.
-
-      firebase deploy
+1. Edit `firebase.json` and change the `"firebase"` property to your
+   Firebase name.
+2. Edit `./app/app.jsx` change the Collection `url` property to your
+   Firebase URL.
 
 
 ## Lessons learnt
 - If the BackboneFire Collection `autoSync` property is `true` (the
   default value) then do not use Backbone Model/Collection
-  `fetch`/`save`/`destroy` syncing functions --  autoSync does that
-  for you.
+  `fetch`/`save`/`destroy` syncing functions --  BackboneFire does
+  that for you.
 
 - The app does not use
   [ReactFire](https://www.firebase.com/docs/web/libraries/react/),

@@ -1,5 +1,5 @@
 {
-  "name": "flux-backbonefire-todo",
+  "name": "flux-backbone-firebase-todo",
   "author": "Stuart Rackham",
   "description": "Didactic Todo app written using Flux, Backbone, Firebase and React.",
   "version": "1.0.0",
@@ -19,7 +19,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/srackham/flux-backbonefire-todo"
+    "url": "https://github.com/srackham/flux-backbone-firebase-todo"
   },
   "dependencies": {
   },
