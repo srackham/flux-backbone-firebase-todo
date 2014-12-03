@@ -1,13 +1,8 @@
 /*
- Simple Todo app written using Flux, Backbone and React.
+ Simple Todo app written using Flux, Backbone, Firebase and React.
  https://github.com/srackham/flux-backbone-todo
  */
 'use strict';
-
-//var React = require('react');
-//var Flux = require('flux');
-//var Backbone = require('backbone');
-//var BackboneLocalStorageSync = require('backbone-localstorage-sync');
 
 /*
  Dispatcher actions.
@@ -21,7 +16,6 @@ var CLEAR_TODOS = 'CLEAR_TODOS';
  */
 var TodoItem = Backbone.Model.extend({
   defaults: {text: '', complete: false},
-  //sync: BackboneLocalStorageSync('flux-backbone-todo'),
 
   initialize: function(attributes, options) {
     this.dispatcher = TodoItem.dispatcher;
@@ -34,7 +28,6 @@ var TodoItem = Backbone.Model.extend({
  */
 var TodoStore = Backbone.Firebase.Collection.extend({
   model: TodoItem,
-  //sync: BackboneLocalStorageSync('flux-backbone-todo'),
   url: 'https://shining-inferno-2496.firebaseio.com/todos',
   autoSync: true,
 
@@ -48,7 +41,6 @@ var TodoStore = Backbone.Firebase.Collection.extend({
     this.on('error', function(model, resp) {
       console.log('ERROR: sync error:', resp);
     });
-    //this.fetch(); // Load models from storage.
   },
 
   dispatchCallback: function(payload) {
@@ -65,11 +57,6 @@ var TodoStore = Backbone.Firebase.Collection.extend({
         var completed = this.filter(function(todoItem) {
           return todoItem.get('complete');
         });
-        //// Destroy todoItem before removing from collection.
-        //// Because removed models have no collection property which is required by LocalStorage.
-        //completed.forEach(function(todoItem) {
-        //  todoItem.destroy()
-        //});
         this.remove(completed);
         break;
     }
@@ -81,8 +68,6 @@ var TodoStore = Backbone.Firebase.Collection.extend({
  Todo form.
  */
 var TodoFormComponent = React.createClass({
-  //mixins: [ReactFireMixin],
-
   propTypes: {
     store: React.PropTypes.instanceOf(TodoStore)
   },
@@ -117,8 +102,6 @@ var TodoFormComponent = React.createClass({
  Todo list component.
  */
 var TodoListComponent = React.createClass({
-  //mixins: [ReactFireMixin],
-
   propTypes: {
     store: React.PropTypes.instanceOf(TodoStore).isRequired
   },
@@ -148,8 +131,6 @@ var TodoListComponent = React.createClass({
  Todo item component.
  */
 var TodoItemComponent = React.createClass({
-  //mixins: [ReactFireMixin],
-
   propTypes: {
     todoItem: React.PropTypes.instanceOf(TodoItem).isRequired
   },
