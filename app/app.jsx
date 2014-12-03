@@ -28,7 +28,7 @@ var TodoItem = Backbone.Model.extend({
  */
 var TodoStore = Backbone.Firebase.Collection.extend({
   model: TodoItem,
-  url: 'https://shining-inferno-2496.firebaseio.com/todos',
+  url: 'https://shining-inferno-2496.firebaseio.com/flux-backbonefire-todo',
   autoSync: true,
 
   initialize: function(models, options) {
